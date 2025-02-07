@@ -1,0 +1,105 @@
+/*
+**
+** Grid
+**
+** Right Column Grid
+**
+** Sliding
+**
+*/
+
+/* ---------- #GRID ---------- */
+
+.grid {
+  position: fixed;
+  top: 10vh;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+}
+
+/* Left Column */
+
+.left {
+  background-color: #ffffff;
+  pointer-events: auto;
+  user-select: none; /* Prevent text selection during resize */
+  overflow: hidden;
+}
+
+/* Right Column */
+
+.right {
+  position: relative;
+  overflow: hidden;
+  border-left: 20px solid var(--color-theme-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+
+/* ---------- #RIGHTCOLUMNGRID ---------- */
+
+.rightColumnGrid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0;
+}
+
+.row {
+  width: 100%;
+  border-bottom: 20px solid var(--color-theme-row-bg);
+  background-color: var(--color-theme-row-bg); 
+  overflow: hidden;
+}
+
+.rowTop {
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  height: 20px;
+  font-size: 10px;
+  background-color: var(--color-theme-bg);
+  backdrop-filter: blur(4.2px);
+  -webkit-backdrop-filter: blur(4.2px);
+  border-radius: 10px 10px 0 0;
+  margin-top: -20px;
+}
+
+.rowTopCirc {
+  width: 12.9px;
+  height: 12.9px;
+  border-radius: 20px;
+  margin-top: -12.9px;
+  margin-left: 100px;
+}
+
+.rowTopDiv {
+  width: 9px;
+  height: 9px;
+  background-color: var(--color-theme-bg);
+  backdrop-filter: blur(4.2px);
+  -webkit-backdrop-filter: blur(4.2px);
+  margin-top: -9px;
+  margin-left: 100px;
+}
+
+.bg-slate-500 {
+  width: 20px;
+  cursor: ew-resize;
+  z-index: 1000;
+  position: relative;
+}
+
+.bg-slate-500:hover {
+  background-color: var(--color-theme-bg);
+}
+
