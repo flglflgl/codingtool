@@ -1,6 +1,6 @@
 <h2>CodingTool</h2>
 
-CodingTool is Code Editor inspired by Codepen with slight enhancements to focus on smoothing the coding experience build. 
+CodingTool is Code Editor inspired by Codepen with slight enhancements to focus on smoothing the coding experience. 
 
 1. Color Themes
 2. Undo/Redo buttons
