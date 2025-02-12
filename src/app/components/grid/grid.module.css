@@ -34,7 +34,7 @@
 
 .right {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   border-left: 20px solid var(--color-theme-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -55,51 +55,61 @@
 }
 
 .row {
+  position: relative;
   width: 100%;
-  border-bottom: 20px solid var(--color-theme-row-bg);
   background-color: var(--color-theme-row-bg); 
+  padding: 20px 10px 10px 10px;
   overflow: hidden;
+  z-index: 1;
+}
+
+.row::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 29px;
+  background-color: var(--color-theme-bg);
+  z-index: 0;
 }
 
 .rowTop {
+  position: absolute;
+  top: 4.9px;
+  left: 0;
   display: flex;
+  align-items: center;
   justify-content: center;
   width: 100px;
-  height: 20px;
+  height: 24px;
   font-size: 10px;
-  background-color: var(--color-theme-bg);
-  backdrop-filter: blur(4.2px);
-  -webkit-backdrop-filter: blur(4.2px);
   border-radius: 10px 10px 0 0;
-  margin-top: -20px;
+  background-color: var(--color-theme-row-bg);
+  color: var(--foreground);
 }
 
 .rowTopCirc {
+  position: absolute;
+  top: 29px;
+  left: 0;
   width: 12.9px;
   height: 12.9px;
   border-radius: 20px;
+  background-color: var(--color-theme-bg);
   margin-top: -12.9px;
   margin-left: 100px;
 }
 
 .rowTopDiv {
+  position: absolute;
+  top: 29px;
+  left: 0;
   width: 9px;
   height: 9px;
-  background-color: var(--color-theme-bg);
-  backdrop-filter: blur(4.2px);
-  -webkit-backdrop-filter: blur(4.2px);
+  background-color: var(--color-theme-row-bg);
   margin-top: -9px;
   margin-left: 100px;
 }
 
-.bg-slate-500 {
-  width: 20px;
-  cursor: ew-resize;
-  z-index: 1000;
-  position: relative;
-}
-
-.bg-slate-500:hover {
-  background-color: var(--color-theme-bg);
-}
 

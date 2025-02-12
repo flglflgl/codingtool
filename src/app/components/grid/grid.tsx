@@ -97,6 +97,9 @@ const Grid: React.FC<GridProps> = ({ htmlEditorRef, cssEditorRef, jsEditorRef })
         <Pane id="P1" className={styles.right} size={1} resizerClass="bg-slate-500">
           <ResizablePanes uniqueId="uniqueId-horizontal" className={styles.rightColumnGrid}>
             <Pane id="P1-0" className={styles.row} size={1}>
+            <div className={styles.rowTop}>HTML</div>
+              <div className={styles.rowTopDiv}></div>
+              <div className={styles.rowTopCirc}></div>
               <CodeMirror
                 value={htmlContent}
                 extensions={[html(), ...baseExtensions]}
@@ -107,6 +110,9 @@ const Grid: React.FC<GridProps> = ({ htmlEditorRef, cssEditorRef, jsEditorRef })
             </Pane>
 
             <Pane id="P1-1" className={styles.row} size={1}>
+            <div className={styles.rowTop}>CSS</div>
+              <div className={styles.rowTopDiv}></div>
+              <div className={styles.rowTopCirc}></div>
               <CodeMirror
                 value={cssContent}
                 extensions={[css(), ...baseExtensions]}
@@ -117,6 +123,9 @@ const Grid: React.FC<GridProps> = ({ htmlEditorRef, cssEditorRef, jsEditorRef })
             </Pane>
 
             <Pane id="P1-2" className={styles.row} size={1}>
+              <div className={styles.rowTop}>JS</div>
+              <div className={styles.rowTopDiv}></div>
+              <div className={styles.rowTopCirc}></div>
               <CodeMirror
                 value={jsContent}
                 extensions={[javascript(), ...baseExtensions]}

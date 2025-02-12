@@ -1,7 +1,9 @@
+
 "use client";
 
 import { useTheme } from 'next-themes';
 import styles from './top.module.css';
+import { useEffect, useState } from 'react';
 
 type TopProps = {
   onUndo: () => void;
@@ -11,6 +13,11 @@ type TopProps = {
 
 export default function Top({ onUndo, onRedo, onSave }: TopProps) {
   const { theme, setTheme } = useTheme();
+  const [bulbIcon, setBulbIcon] = useState("/bulb.svg");
+
+  useEffect(() => {
+    setBulbIcon(theme === "light" ? "/bulbOn.svg" : "/bulb.svg");
+  }, [theme]);
 
   return (
     <div className={styles.top}>
@@ -31,7 +38,7 @@ export default function Top({ onUndo, onRedo, onSave }: TopProps) {
           className={styles.bulb}
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
-          <img src="/bulb.svg" alt="Toggle Theme" />
+          <img src={bulbIcon} alt="Toggle Theme" />
         </button>
       </div>
     </div>
