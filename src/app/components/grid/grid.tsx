@@ -9,6 +9,7 @@ import { EditorState } from "@codemirror/state";
 import { indentWithTab } from "@codemirror/commands";
 import { undo, redo } from "@codemirror/commands";
 import CodeMirror from "@uiw/react-codemirror";
+import { ViewUpdate } from "@codemirror/view";
 import styles from "./grid.module.css";
 import { javascript } from "@codemirror/lang-javascript";
 import { html } from "@codemirror/lang-html";
@@ -51,7 +52,7 @@ const Grid: React.FC<GridProps> = ({ htmlEditorRef, cssEditorRef, jsEditorRef })
     alert("Pen saved!");
   };
 
-  const handleEditorUpdate = (update: any, editorRef: React.RefObject<EditorView | null>) => {
+  const handleEditorUpdate = (update: ViewUpdate, editorRef: React.RefObject<EditorView | null>) => {
     if (update.view) {
       editorRef.current = update.view;
     }
