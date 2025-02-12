@@ -1,7 +1,9 @@
+
 "use client";
 
 import { ThemeProvider } from "next-themes";
 import { useEffect, useState } from "react";
+import { CodeEditorProvider } from "./context/EditorContext";
 import "./globals.css";
 
 export default function RootLayout({
@@ -28,9 +30,10 @@ export default function RootLayout({
           enableSystem={true} // Allow system preferences
           disableTransitionOnChange={true} // Prevent transition effects on hydration
         >
-          {children}
+          <CodeEditorProvider>{children}</CodeEditorProvider>
         </ThemeProvider>
       </body>
     </html>
   );
 }
+

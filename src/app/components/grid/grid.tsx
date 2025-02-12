@@ -2,12 +2,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useCodeEditor } from "../../context/EditorContext";
 import { Pane, ResizablePanes } from "resizable-panes-react";
-import { useTheme } from "next-themes";
 import { EditorView, keymap } from "@codemirror/view";
 import { EditorState } from "@codemirror/state";
 import { indentWithTab } from "@codemirror/commands";
-import { undo, redo } from "@codemirror/commands";
 import CodeMirror from "@uiw/react-codemirror";
 import { ViewUpdate } from "@codemirror/view";
 import styles from "./grid.module.css";
@@ -16,23 +15,24 @@ import { html } from "@codemirror/lang-html";
 import { css } from "@codemirror/lang-css";
 import Top from "../top/top";
 
-interface GridProps {
-  htmlEditorRef: React.RefObject<EditorView | null>;
-  cssEditorRef: React.RefObject<EditorView | null>;
-  jsEditorRef: React.RefObject<EditorView | null>;
-}
+const Grid: React.FC = () => {
+  const {
+    theme,
+    onUndo,
+    onRedo,
+    onSave,
+    setHtmlEditorRef,
+    setCssEditorRef,
+    setJsEditorRef,
+  } = useCodeEditor();
 
-const Grid: React.FC<GridProps> = ({ htmlEditorRef, cssEditorRef, jsEditorRef }) => {
   const [htmlContent, setHtmlContent] = useState("");
   const [cssContent, setCssContent] = useState("");
   const [jsContent, setJsContent] = useState("");
 
-  const { theme } = useTheme();
-
   const baseExtensions = [keymap.of([indentWithTab]), EditorState.tabSize.of(2)];
 
   useEffect(() => {
-    // Load saved pen data from localStorage when component mounts
     const savedPen = localStorage.getItem("savedPen");
     if (savedPen) {
       const { html, css, js } = JSON.parse(savedPen);
@@ -42,41 +42,9 @@ const Grid: React.FC<GridProps> = ({ htmlEditorRef, cssEditorRef, jsEditorRef })
     }
   }, []);
 
-  const handleSave = () => {
-    const penData = {
-      html: htmlContent,
-      css: cssContent,
-      js: jsContent,
-    };
-    localStorage.setItem("savedPen", JSON.stringify(penData));
-    alert("Pen saved!");
-  };
-
-  const handleEditorUpdate = (update: ViewUpdate, editorRef: React.RefObject<EditorView | null>) => {
-    if (update.view) {
-      editorRef.current = update.view;
-    }
-  };
-
-  const handleUndo = (editorRef: React.RefObject<EditorView | null>) => {
-    if (editorRef.current) {
-      undo(editorRef.current);
-    }
-  };
-
-  const handleRedo = (editorRef: React.RefObject<EditorView | null>) => {
-    if (editorRef.current) {
-      redo(editorRef.current);
-    }
-  };
-
   return (
     <div className={styles.container}>
-      <Top 
-        onUndo={() => handleUndo(htmlEditorRef)} 
-        onRedo={() => handleRedo(htmlEditorRef)} 
-        onSave={handleSave} 
-      />
+      <Top onUndo={onUndo} onRedo={onRedo} onSave={onSave} />
 
       <ResizablePanes uniqueId="uniqueId" className={styles.grid} vertical>
         <Pane id="P0" className={styles.left} size={1} resizerClass="bg-slate-500">
@@ -98,41 +66,39 @@ const Grid: React.FC<GridProps> = ({ htmlEditorRef, cssEditorRef, jsEditorRef })
         <Pane id="P1" className={styles.right} size={1} resizerClass="bg-slate-500">
           <ResizablePanes uniqueId="uniqueId-horizontal" className={styles.rightColumnGrid}>
             <Pane id="P1-0" className={styles.row} size={1}>
-            <div className={styles.rowTop}>HTML</div>
-              <div className={styles.rowTopDiv}></div>
-              <div className={styles.rowTopCirc}></div>
+              <div className={styles.rowTop}>HTML</div>
               <CodeMirror
                 value={htmlContent}
                 extensions={[html(), ...baseExtensions]}
-                onChange={(value) => setHtmlContent(value)}
+                onChange={setHtmlContent}
                 theme={theme === "dark" ? "dark" : "light"}
-                onUpdate={(update) => handleEditorUpdate(update, htmlEditorRef)}
+                onUpdate={(update: ViewUpdate) => {
+                  if (update.view) setHtmlEditorRef(update.view);
+                }}
               />
             </Pane>
-
             <Pane id="P1-1" className={styles.row} size={1}>
-            <div className={styles.rowTop}>CSS</div>
-              <div className={styles.rowTopDiv}></div>
-              <div className={styles.rowTopCirc}></div>
+              <div className={styles.rowTop}>CSS</div>
               <CodeMirror
                 value={cssContent}
                 extensions={[css(), ...baseExtensions]}
-                onChange={(value) => setCssContent(value)}
+                onChange={setCssContent}
                 theme={theme === "dark" ? "dark" : "light"}
-                onUpdate={(update) => handleEditorUpdate(update, cssEditorRef)}
+                onUpdate={(update: ViewUpdate) => {
+                  if (update.view) setCssEditorRef(update.view);
+                }}
               />
             </Pane>
-
             <Pane id="P1-2" className={styles.row} size={1}>
               <div className={styles.rowTop}>JS</div>
-              <div className={styles.rowTopDiv}></div>
-              <div className={styles.rowTopCirc}></div>
               <CodeMirror
                 value={jsContent}
                 extensions={[javascript(), ...baseExtensions]}
-                onChange={(value) => setJsContent(value)}
+                onChange={setJsContent}
                 theme={theme === "dark" ? "dark" : "light"}
-                onUpdate={(update) => handleEditorUpdate(update, jsEditorRef)}
+                onUpdate={(update: ViewUpdate) => {
+                  if (update.view) setJsEditorRef(update.view);
+                }}
               />
             </Pane>
           </ResizablePanes>
