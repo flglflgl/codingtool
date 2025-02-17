@@ -7,7 +7,7 @@ CodingTool is Code Editor inspired by Codepen with slight spins to focus on smoo
 3. Utilising CodeMirror to suggest/prefill code
 
 <video muted playsinline>
-<source src="public/codingtool.mp4" type="video/mp4">
+<source src="codingtool.mp4" type="video/mp4">
 Your browser does not support video.
 </video>
 
