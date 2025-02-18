@@ -6,7 +6,7 @@ CodingTool is Code Editor inspired by Codepen with slight spins to focus on smoo
 2. Undo/Redo buttons
 3. Utilising CodeMirror to suggest/prefill code
 
-[Watch the video](https://github.com/flglflgl/codingtool/raw/main/codingtool.mp4)
+![Alt text](codingtool.gif)
 
 <h2>Technologies</h2>
 
