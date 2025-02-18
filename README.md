@@ -6,8 +6,6 @@ CodingTool is Code Editor inspired by Codepen with slight spins to focus on smoo
 2. Undo/Redo buttons
 3. Utilising CodeMirror to suggest/prefill code
 
-![Alt text](codingtool.gif)
-
 <h2>Technologies</h2>
 
 Next.JS HTML CSS JS TypeScript Next-Themes CodeMirror Vercel
